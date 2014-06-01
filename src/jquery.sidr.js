@@ -168,6 +168,9 @@
         $menu.animate(menuAnimation, speed, function() {
           $menu.removeAttr('style').hide();
           $body.removeAttr('style');
+          if($fixedscroll) {
+            $fixedscroll.removeAttr('style');
+	      }
           $('html').removeAttr('style');
           sidrMoving = false;
           sidrOpened = false;
