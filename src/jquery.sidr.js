@@ -166,6 +166,7 @@
 	        $fixedscroll.animate(bodyAnimation, speed);
 	    }
         $menu.animate(menuAnimation, speed, function() {
+		  $menu.scrollTop(0);
           $menu.removeAttr('style').hide();
           $body.removeAttr('style');
           if($fixedscroll) {
