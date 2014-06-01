@@ -322,6 +322,10 @@
             methods.toggle(name);
           });
         }
+        $this.click(function(e) {
+          e.preventDefault();
+          methods.toggle(name);
+        });
       }
     });
   };
