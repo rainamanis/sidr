@@ -58,6 +58,7 @@
       // Declaring
       var $menu = $('#' + name),
           $body = $($menu.data('body')),
+          $fixedscroll = $($menu.data('fixedscroll')),
           $html = $('html'),
           menuWidth = $menu.outerWidth(true),
           speed = $menu.data('speed'),
@@ -113,6 +114,9 @@
           }).animate(bodyAnimation, speed, function() {
             $(this).addClass(bodyClass);
           });
+          if($fixedscroll) {
+            $fixedscroll.animate(bodyAnimation, speed, function() {});
+          }
         }
         else {
           setTimeout(function() {
@@ -158,6 +162,9 @@
           $html.removeAttr('style').scrollTop(scrollTop);
         }
         $body.addClass('sidr-animating').animate(bodyAnimation, speed).removeClass(bodyClass);
+        if($fixedscroll) {
+	        $fixedscroll.animate(bodyAnimation, speed);
+	    }
         $menu.animate(menuAnimation, speed, function() {
           $menu.removeAttr('style').hide();
           $body.removeAttr('style');
@@ -217,6 +224,7 @@
       source        : null,           // Override the source of the content.
       renaming      : true,           // The ids and classes will be prepended with a prefix when loading existent content
       body          : 'body',         // Page container selector,
+      fixedscroll	: '',
       displace: true, // Displace the body content or not
       onOpen        : function() {},  // Callback when sidr opened
       onClose       : function() {}   // Callback when sidr closed
@@ -240,7 +248,8 @@
         speed          : settings.speed,
         side           : settings.side,
         body           : settings.body,
-        displace      : settings.displace,
+        fixedscroll    : settings.fixedscroll,
+        displace       : settings.displace,
         onOpen         : settings.onOpen,
         onClose        : settings.onClose
       });
@@ -277,7 +286,7 @@
     else if(settings.source !== null) {
       $.error('Invalid Sidr Source');
     }
-    
+
 	$(window).on('resize', function () {
  		$.sidr('close', name);
  	});
